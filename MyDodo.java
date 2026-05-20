@@ -116,12 +116,15 @@ public void climbOverFence() {
      public boolean grainAhead() {   //chekt of er een grain voor hem staat en draait om en gaat terug
       step();
       boolean grainFound = onGrain();
-      turn180();
-      step();
-      turn180();
+      stepOneCellBackwards();
       return grainFound;
   }
     
+  public void stepOneCellBackwards() {  // een stap achter uit 
+      turn180();
+      step();
+      turn180();
+  }
     
     /**
      * Walks to edge of the world printing the coordinates at each step
@@ -131,14 +134,20 @@ public void climbOverFence() {
      *              Coordinates of each cell printed in the console.
      */
 
-    public void walkToWorldEdgePrintingCoordinates( ){
+    public void walkToWorldEdgePrintingCoordinates( ){   // loop door tot je border ziet
         while( ! borderAhead() ){
             System.out.println(getX() + ", " + getY()); // printcordinaten 
             move();
         }
          System.out.println(getX() + ", " + getY()); // laatste cel
     }
-
+    
+public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktoworldsedge inprincipe gaat ie terug naar de start van  de rij
+      turn180();
+      walkToWorldEdge();
+      turn180();
+  }
+  
     /**
      * Test if Dodo can lay an egg.
      *          (there is not already an egg in the cell)
