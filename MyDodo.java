@@ -158,4 +158,9 @@ public void climbOverFence() {
             return true;
         }
     }  
+    public void walkToWorldEdge() {
+        while (!borderAhead()){
+            move();
+        }
+    }
 }
