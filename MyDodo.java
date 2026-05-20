@@ -125,7 +125,17 @@ public void climbOverFence() {
       step();
       turn180();
   }
-    
+  
+    public void walkToWorldEdgeClimbingOverFences() {
+      while (!borderAhead()) {  
+          if (fenceAhead()) {
+              climbOverFence();
+          } else {
+              move();
+          }
+      }
+  }
+  
     /**
      * Walks to edge of the world printing the coordinates at each step
      * 
