@@ -126,13 +126,27 @@ public void climbOverFence() {
       turn180();
   }
   
-    public void walkToWorldEdgeClimbingOverFences() {
+    public void walkToWorldEdgeClimbingOverFences() {   // loop naar de rand en klim over fences
       while (!borderAhead()) {  
           if (fenceAhead()) {
               climbOverFence();
           } else {
               move();
           }
+      }
+  }
+  
+  public void pickUpGrainsAndPrintCoordinates() { // dodo loop naar vooren en onder weg pakt ie graan op en prinie cordinaten
+      while (!borderAhead()) {
+          if (onGrain()) {
+              System.out.println(getX() + ", " + getY());
+              pickUpGrain();
+          }
+          move();
+      }
+      if (onGrain()) {
+          System.out.println(getX() + ", " + getY());
+          pickUpGrain();
       }
   }
   
