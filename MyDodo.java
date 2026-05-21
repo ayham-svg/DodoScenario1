@@ -159,17 +159,21 @@ public void climbOverFence() {
      */
 
     public void walkToWorldEdgePrintingCoordinates( ){   // loop door tot je border ziet
-        while( ! borderAhead() ){
-            System.out.println(getX() + ", " + getY()); // printcordinaten 
+        while( ! borderAhead() ){ 
             move();
         }
-         System.out.println(getX() + ", " + getY()); // laatste cel
     }
     
 public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktoworldsedge inprincipe gaat ie terug naar de start van  de rij
       turn180();
       walkToWorldEdge();
       turn180();
+  }
+  
+  public void gotoEgg() {
+      while (!onEgg()) {
+          move();
+      }
   }
   
     /**
