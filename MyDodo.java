@@ -176,6 +176,18 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       }
   }
   
+  public void layEggInEmptyNests() {
+      while (!borderAhead()) {
+          if (onNest() && !onEgg()) {
+              layEgg();
+          }
+          move();
+      }
+      if (onNest() && !onEgg()) {
+          layEgg();
+      }
+  }
+  
     /**
      * Test if Dodo can lay an egg.
      *          (there is not already an egg in the cell)
