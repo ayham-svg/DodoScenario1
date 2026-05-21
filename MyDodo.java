@@ -203,6 +203,19 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       }
   }
   
+  public void walkToWorldEdgeClimbingOverFencesAndLayEgg() {
+      while (!borderAhead()) {
+          if (fenceAhead()) {
+              climbOverFence();
+          } else {
+              move();
+          }
+          if (onNest() && canLayEgg()) {
+              layEgg();
+          }
+      }
+  }
+  
   public void walkAroundFencedArea() {
       while (!onEgg()){
       turnRight();
