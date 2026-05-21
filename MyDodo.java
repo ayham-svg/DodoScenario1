@@ -188,6 +188,31 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       }
   }
   
+   public void walkAroundOtherFencedArea() { // extra turnLeft() toegevoegd en while loop  
+      while (!onEgg()) {
+          turnRight();
+          if (canMove()) {
+              move();
+          } else {
+              turnLeft();
+              while (!canMove()) {
+                  turnLeft();
+              }
+              move();
+          }
+      }
+  }
+  
+  public void walkAroundFencedArea() {
+      while (!onEgg()){
+      turnRight();
+      if (fenceAhead()){
+          turnLeft();
+        }
+        move();
+  }
+}  
+  
     /**
      * Test if Dodo can lay an egg.
      *          (there is not already an egg in the cell)
