@@ -209,6 +209,10 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       }
   }
   
+  public boolean locationReached(int x, int y) {
+      return getX() == x && getY() == y;
+  }
+  
   public void walkToWorldEdgeClimbingOverFencesAndLayEgg() {
       while (!borderAhead()) {
           if (fenceAhead()) {
@@ -218,6 +222,24 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
           }
           if (onNest() && canLayEgg()) {
               layEgg();
+          }
+      }
+  }
+  
+   public void goToLocation(int coordX, int coordY) {
+      while (!locationReached(coordX, coordY)) {
+          if (getX() < coordX) {
+              setDirection(EAST);
+              move();
+          } else if (getX() > coordX) {
+              setDirection(WEST);
+              move();
+          } else if (getY() < coordY) {
+              setDirection(SOUTH);
+              move();
+          } else if (getY() > coordY) {
+              setDirection(NORTH);
+              move();
           }
       }
   }
