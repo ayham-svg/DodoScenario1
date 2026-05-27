@@ -60,6 +60,12 @@ public boolean canMove() {
       turnRight();
   }
   
+ public void faceEast() {   // kijk east
+      while (getDirection() != EAST) {
+          turnRight();
+      }
+  } 
+  
 public void climbOverFence() {
     turnLeft();
     step();
