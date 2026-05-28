@@ -86,6 +86,21 @@ public boolean canMove() {
           }
       }
   }
+  
+  public void simpleMaze () {  
+      while (!onNest()) {
+          turnRight();
+          if (canMove()) {
+              move();
+          } else {
+              turnLeft();
+              while (!canMove()) {
+                  turnLeft();
+              }
+              move();
+          }
+      }
+}
 
   public void faceEgg() {
       turn180();
