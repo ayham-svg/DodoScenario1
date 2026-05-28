@@ -17,6 +17,7 @@ public class MyDodo extends Dodo
     public void act() {
     }
 
+    
     /**
      * Move one cell forward in the current direction.
      * 
@@ -66,6 +67,40 @@ public boolean canMove() {
       }
   } 
   
+  //public boolean eggAhead() {
+  //    step();
+  //    boolean found = onEgg() || onNest();
+  //    stepOneCellBackwards();
+  //return found;
+ // }
+  
+  public void eggTrailToNestSlordig() {
+      while (!onNest()) {
+          if (eggAhead() || nestAhead()) {
+              move();
+          } else {
+              turnRight();
+              if (!eggAhead()) {
+                  turn180();
+                }
+          }
+      }
+  }
+
+  public void faceEgg() {
+      turn180();
+      turnRight();                                                                                                                                        
+      while (!eggAhead()) {
+          turnRight();
+      }
+  }
+
+  public void eggTrailToNest() {
+      while (!onNest()) {
+          faceEgg();
+          move();
+      }
+  }
 public void climbOverFence() {
     turnLeft();
     step();
@@ -226,7 +261,8 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       }
   }
   
-   public void goToLocation(int coordX, int coordY) {
+   public void goToLocation(int coordX, int coordY) {  // vind coodinaten bijv als is te klein is 4.2 stap oost 5.2 of als zuid te klein is 5.2 stap zuid 5.3
+       
       while (!locationReached(coordX, coordY)) {
           if (getX() < coordX) {
               setDirection(EAST);
@@ -243,6 +279,17 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
           }
       }
   }
+  
+  public boolean validCoordinates(int x, int y) {  /// hier controleer ik of de codinaten kloppen met de wereld greenfoot begint met 0 blijk baat dus ik doe dan niet lager dan 0 en niet hoger dan de waarde die ik terug krijg van getWidth   en dat doe ik ook voor height 
+      int width = getWorld().getWidth();
+      int height = getWorld().getHeight();
+      if (x >= 0 && x < width && y >= 0 && y < height) {
+          return true;
+      } else {
+          showError("Invalid coordinates");
+          return false;
+      }
+  }    
   
   public void walkAroundFencedArea() {
       while (!onEgg()){
