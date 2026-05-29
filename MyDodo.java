@@ -61,11 +61,7 @@ public boolean canMove() {
       turnRight();
   }
   
- public void faceEast() {   // kijk east
-      while (getDirection() != EAST) {
-          turnRight();
-      }
-  } 
+ 
   
   //public boolean eggAhead() {
   //    step();
@@ -100,6 +96,7 @@ public boolean canMove() {
               move();
           }
       }
+      showCompliment("Nest gevonden!");
 }
 
   public void faceEgg() {
@@ -109,6 +106,19 @@ public boolean canMove() {
           turnRight();
       }
   }
+  
+  public void face(int direction) {
+      if (direction >= 0 && direction <= 3) {
+          while (getDirection() != direction) {
+              turnRight();
+          }
+      }
+  }
+    
+public void faceEast()  { face(EAST);  }
+public void faceWest()  { face(WEST);  }
+public void faceNorth() { face(NORTH); }
+public void faceSouth() { face(SOUTH); }
 
   public void eggTrailToNest() {
       while (!onNest()) {
@@ -116,6 +126,7 @@ public boolean canMove() {
           move();
       }
   }
+  
 public void climbOverFence() {
     turnLeft();
     step();
