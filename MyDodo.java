@@ -334,6 +334,37 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       }
   }
   
+  public int countAllEggs() { // tel eiren in de wereld cotroleer eerst hoogte breede van de wereld 
+      int totalEggs = 0;
+      int height = getWorld().getHeight();
+      int row = 0;
+
+      while (row < height) {
+          goToLocation(0, row);
+          face(EAST);
+          int eggsInRow = countEggsInRow();
+          System.out.println("Rij " + row + ": " + eggsInRow + " eieren");
+          totalEggs += eggsInRow;
+          row++;
+      }
+
+      goToLocation(0, 0);
+      System.out.println("Totaal: " + totalEggs);
+      return totalEggs;
+  }
+  
+   public int countEggsInRow() { // tel eiren in een rij
+      int count = 0;
+      if (onEgg()) { count++; }
+      while (!borderAhead()) {
+          move();
+          if (onEgg()) { count++; }
+      }
+      goBackToStartOfRowAndFaceBack();
+      showCompliment("Aantal eieren in rij: " + count);
+      return count;
+  }
+  
   public void walkAroundFencedArea() {
       while (!onEgg()){
       turnRight();
