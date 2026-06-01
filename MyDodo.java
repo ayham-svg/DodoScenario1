@@ -94,7 +94,7 @@ public boolean canMove() {
                   turnLeft();
               }
               move();
-          }
+        }
       }
       showCompliment("Nest gevonden!");
 }
@@ -291,16 +291,16 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
        
       while (!locationReached(coordX, coordY)) {
           if (getX() < coordX) {
-              setDirection(EAST);
+              face(1);
               move();
           } else if (getX() > coordX) {
-              setDirection(WEST);
+              face(3);
               move();
           } else if (getY() < coordY) {
-              setDirection(SOUTH);
+              face(2);
               move();
           } else if (getY() > coordY) {
-              setDirection(NORTH);
+              face(0);
               move();
           }
       }
