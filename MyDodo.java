@@ -317,6 +317,23 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       }
   }    
   
+  public void layTrailOfEggs(int n) {
+      if (n <= 0) {
+          showError("Ongeldig aantal");
+          return;
+      }
+      int count = 0;
+      while (count < n) {
+          if (canLayEgg()) {
+              layEgg();
+          }
+          count++;
+          if (count < n) {
+              move();
+          }
+      }
+  }
+  
   public void walkAroundFencedArea() {
       while (!onEgg()){
       turnRight();
