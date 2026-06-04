@@ -341,9 +341,8 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
 
       while (row < height) {
           goToLocation(0, row);
-          face(EAST);
+          face(1);
           int eggsInRow = countEggsInRow();
-          System.out.println("Rij " + row + ": " + eggsInRow + " eieren");
           totalEggs += eggsInRow;
           row++;
       }
@@ -361,9 +360,10 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
           if (onEgg()) { count++; }
       }
       goBackToStartOfRowAndFaceBack();
-      showCompliment("Aantal eieren in rij: " + count);
       return count;
   }
+  
+  
   
   public void walkAroundFencedArea() {
       while (!onEgg()){
@@ -373,7 +373,26 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
         }
         move();
   }
-}  
+}
+
+public int rowWithMostEggs() {
+      int maxEggs = 0;
+      int bestRow = 0;
+      int height = getWorld().getHeight();                                                                             
+      int row = 0;
+
+      while (row < height) {
+          goToLocation(0, row);
+          face(1);
+          int eggsInRow = countEggsInRow();
+          System.out.println("Rij " + row + ": " + eggsInRow + " eieren");
+          if (eggsInRow > maxEggs) {
+              maxEggs = eggsInRow;
+              bestRow = row;
+          }
+          row++;
+      }  
+    
   
     /**
      * Test if Dodo can lay an egg.
