@@ -99,6 +99,8 @@ public boolean canMove() {
       showCompliment("Nest gevonden!");
 }
 
+
+
   public void faceEgg() {
       turn180();
       turnRight();                                                                                                                                        
@@ -255,6 +257,23 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       }
   }
   
+  
+  public void pyramidOfEggs() {
+      int startX = getX();
+      int startY = getY();
+      int height = getWorld().getHeight() - startY;
+      int row = 0;
+
+      while (row < height && startX - row >= 0) {
+          goToLocation(startX - row, startY + row);
+          faceEast();
+          layTrailOfEggs(2 * row + 1);
+          row++;
+      }
+
+      goToLocation(startX, startY);
+  }
+  
    public void walkAroundOtherFencedArea() { // extra turnLeft() toegevoegd en while loop  
       while (!onEgg()) {
           turnRight();
@@ -306,6 +325,7 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       }
   }
   
+  
   public boolean validCoordinates(int x, int y) {  /// hier controleer ik of de codinaten kloppen met de wereld greenfoot begint met 0 blijk baat dus ik doe dan niet lager dan 0 en niet hoger dan de waarde die ik terug krijg van getWidth   en dat doe ik ook voor height 
       int width = getWorld().getWidth();
       int height = getWorld().getHeight();
@@ -352,6 +372,15 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       return totalEggs;
   }
   
+  
+   public double averageEggsPerRow() {
+      int totalEggs = countAllEggs();
+      int height = getWorld().getHeight();
+      double average = (double) totalEggs / height;
+      System.out.println("Gemiddelde eieren per rij: " + average);
+      return average;
+  }
+  
    public int countEggsInRow() { // tel eiren in een rij
       int count = 0;
       if (onEgg()) { count++; }
@@ -362,6 +391,38 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       goBackToStartOfRowAndFaceBack();
       return count;
   }
+  
+  public void mounumentOfEggs(){
+   int startX = getX();
+   int startY = getY();
+   int height = getWorld().getHeight();
+   int row = 0;
+   while (row < height - startY) {
+    goToLocation(startX, startY + row);
+    face(1);
+    layTrailOfEggs(row + 1);
+    row++;
+    }
+    goToLocation(startX,startY);
+    face(1);
+    }
+    
+public void mounumentOfeggs(){
+   int startX = getX();
+   int startY = getY();
+   int height = getWorld().getHeight();
+   int count = 1;
+   int row = 0;
+   while (row < height - startY  && count <= getWorld().getWidth() - startX) {
+    goToLocation(startX, startY + row);
+    face(1);
+    layTrailOfEggs(count);
+    count = count * 2;
+    row++;
+    }
+    goToLocation(startX,startY);
+    face(1);
+    }
   
   
   
@@ -392,7 +453,8 @@ public int rowWithMostEggs() {
           }
           row++;
       }  
-    
+      return(row);
+    }
   
     /**
      * Test if Dodo can lay an egg.
