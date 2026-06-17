@@ -259,6 +259,46 @@ public void climbOverFence() {  // klim over een hekjee
       }
   }
   
+  public void herstelWereld() {
+    int width = getWorld().getWidth();
+    int height = getWorld().getHeight();
+    int rij = -1;
+    int kolom = -1;
+
+    int y = 0;
+    while (y < height) {
+        goToLocation(0, y);
+        faceEast();
+        if (countEggsInRow() % 2 != 0) {
+            rij = y;
+        }
+        y++;
+    }
+
+    int x = 0;
+    while (x < width) {
+        goToLocation(x, 0);
+        faceSouth();
+        if (countEggsInRow() % 2 != 0) {
+            kolom = x;
+        }
+        x++;
+    }
+
+    if (rij == -1) {
+        showCompliment("Geen fout gevonden!");
+    } else {
+        goToLocation(kolom, rij);
+        if (onEgg()) {
+            pickUpEgg();
+        } else {
+            layEgg();
+        }
+        showCompliment("Wereld hersteld!");
+    }
+}
+
+  
   public void pickUpGrainsAndPrintCoordinates() { // dodo loop naar vooren en onder weg pakt ie graan op en prinie cordinaten
       while (!borderAhead()) {
           if (onGrain()) {
