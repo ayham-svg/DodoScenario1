@@ -100,6 +100,66 @@ public boolean canMove() {
 }
 
 
+public void prepareWorld() { // legt eiren op oneven rijen 
+    int width = getWorld().getWidth();
+    int height = getWorld().getHeight(); 
+    int y = 0;
+    while (y < height) {
+        goToLocation(0, y);
+        faceEast();
+        int eggs = countEggsInRow();
+        if (eggs % 2 != 0) {           
+            goToLocation(width - 1, y);
+            layEgg();
+        }
+        y++;
+    }
+    int x = 0;
+    while (x < width) {
+        goToLocation(x, 0);
+        faceSouth();
+        int eggs = countEggsInRow();  
+        if (eggs % 2 != 0) {
+            goToLocation(x, height - 1);
+            layEgg();
+        }
+        x++;
+    }
+}
+
+public void zoekFout() {  // zoekt fout tussen x en y as en legt ei op kruisput 
+    int width = getWorld().getWidth();
+    int height = getWorld().getHeight();
+    int rij = -1;    
+    int kolom = -1;
+    int y = 0;
+    while (y < height) {
+        goToLocation(0, y);
+        faceEast();
+        if (countEggsInRow() % 2 != 0) {
+            rij = y;
+        }
+        y++;
+    }
+    int x = 0;
+    while (x < width) {
+        goToLocation(x, 0);
+        faceSouth();
+        if (countEggsInRow() % 2 != 0) {
+            kolom = x;
+        }
+        x++;
+    }
+    if (rij == -1) {
+        showCompliment("Geen fout gevonden!");
+    } else {
+        goToLocation(kolom, rij);
+        showError("Fout bij (" + kolom + ", " + rij + ")");
+    }
+}
+
+
+
 
   public void faceEgg() {
       turn180();
