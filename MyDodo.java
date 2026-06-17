@@ -62,13 +62,7 @@ public boolean canMove() {
   }
   
  
-  
-  //public boolean eggAhead() {
-  //    step();
-  //    boolean found = onEgg() || onNest();
-  //    stepOneCellBackwards();
-  //return found;
- // }
+ 
   
   public void eggTrailToNestSlordig() {
       while (!onNest()) {
@@ -83,12 +77,11 @@ public boolean canMove() {
       }
   }
   
-  public void simpleMaze () {  
+  public void simpleMaze () {      //  zo lang je nie op nest bent draai naar recht kun je door ga door anders draai links kun je door ga door anders draai links 
       while (!onNest()) {
           turnRight();
           if (canMove()) {
-              move();
-          } else {
+              move();          } else {
               turnLeft();
               while (!canMove()) {
                   turnLeft();
@@ -161,15 +154,15 @@ public void zoekFout() {  // zoekt fout tussen x en y as en legt ei op kruisput
 
 
 
-  public void faceEgg() {
-      turn180();
+  public void faceEgg() {    // draai naar ei toe  
+    turn180();
       turnRight();                                                                                                                                        
       while (!eggAhead()) {
           turnRight();
       }
   }
   
-  public void face(int direction) {
+  public void face(int direction) {  // draai in de richting van 0 tot 3 
       if (direction >= 0 && direction <= 3) {
           while (getDirection() != direction) {
               turnRight();
@@ -182,14 +175,14 @@ public void faceWest()  { face(WEST);  }
 public void faceNorth() { face(NORTH); }
 public void faceSouth() { face(SOUTH); }
 
-  public void eggTrailToNest() {
+  public void eggTrailToNest() { // volg de eiren met behulp van de fuctie face egge en move tot je bijnest uitkomt 
       while (!onNest()) {
           faceEgg();
           move();
       }
   }
   
-public void climbOverFence() {
+public void climbOverFence() {  // klim over een hekjee
     turnLeft();
     step();
     turnRight();
@@ -207,7 +200,8 @@ public void climbOverFence() {
      * 
      * <p> Initial: Dodo is somewhere in the world. There is an egg in Dodo's cell.
      * <p> Final: Dodo is in the same cell. The egg has been removed (hatched).     
-     */    
+     */
+    
     public void hatchEgg () {
         if ( onEgg() ) {
             pickUpEgg();
@@ -299,13 +293,13 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       turn180();
   }
   
-  public void gotoEgg() {
+  public void gotoEgg() { // ga recht door tot je op ei zit 
       while (!onEgg()) {
           move();
       }
   }
   
-  public void layEggInEmptyNests() {
+  public void layEggInEmptyNests() { // move recht door zolang geen border ahead leg een eig op het nest zolang geen ei er in zit 
       while (!borderAhead()) {
           if (onNest() && !onEgg()) {
               layEgg();
@@ -318,7 +312,7 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
   }
   
   
-  public void pyramidOfEggs() {
+  public void pyramidOfEggs() {   // maak een piramide zo vermogeijk 
       int startX = getX();
       int startY = getY();
       int height = getWorld().getHeight() - startY;
@@ -349,11 +343,11 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       }
   }
   
-  public boolean locationReached(int x, int y) {
+  public boolean locationReached(int x, int y) { 
       return getX() == x && getY() == y;
   }
   
-  public void walkToWorldEdgeClimbingOverFencesAndLayEgg() {
+  public void walkToWorldEdgeClimbingOverFencesAndLayEgg() { // ga naar het eiende van de wereld klim over hekken tot aan bij nest en leg een ei 
       while (!borderAhead()) {
           if (fenceAhead()) {
               climbOverFence();
@@ -397,7 +391,7 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       }
   }    
   
-  public void layTrailOfEggs(int n) {
+  public void layTrailOfEggs(int n) {  
       if (n <= 0) {
           showError("Ongeldig aantal");
           return;
@@ -433,7 +427,7 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
   }
   
   
-   public double averageEggsPerRow() {
+   public double averageEggsPerRow() {  // tell alle eiren en geef de gemiddelde per rij
       int totalEggs = countAllEggs();
       int height = getWorld().getHeight();
       double average = (double) totalEggs / height;
@@ -452,7 +446,7 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
       return count;
   }
   
-  public void mounumentOfEggs(){
+  public void mounumentOfEggs(){    //  maak het monumet van eiren tot niet meer kan
    int startX = getX();
    int startY = getY();
    int height = getWorld().getHeight();
@@ -467,7 +461,7 @@ public void goBackToStartOfRowAndFaceBack() {   // draai om en en speel walktowo
     face(1);
     }
     
-public void mounumentOfeggs(){
+public void mounumentOfeggs(){  // maak monumetn tot niet meer kan
    int startX = getX();
    int startY = getY();
    int height = getWorld().getHeight();
@@ -486,7 +480,7 @@ public void mounumentOfeggs(){
   
   
   
-  public void walkAroundFencedArea() {
+  public void walkAroundFencedArea() {  //  loop om fences heen door wile not on egge draai heltijd naar recht tot je kunt moven anders draai je links en move draai recht move enzovoort 
       while (!onEgg()){
       turnRight();
       if (fenceAhead()){
@@ -496,7 +490,7 @@ public void mounumentOfeggs(){
   }
 }
 
-public int rowWithMostEggs() {
+public int rowWithMostEggs() {    // vijnd rij met meeste eiren 
       int maxEggs = 0;
       int bestRow = 0;
       int height = getWorld().getHeight();                                                                             
@@ -535,7 +529,7 @@ public int rowWithMostEggs() {
             return true;
         }
     }  
-    public void walkToWorldEdge() {
+    public void walkToWorldEdge() {  // loop helemaal naar het einde van de wereld 
         while (!borderAhead()){
             move();
         }
