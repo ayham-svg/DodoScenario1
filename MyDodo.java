@@ -259,7 +259,7 @@ public void climbOverFence() {  // klim over een hekjee
       }
   }
   
-  public void herstelWereld() {
+  public void herstelWereld() {     // zoek de fout van oneven kolom en rij en leg ei of haal weg 
     int width = getWorld().getWidth();
     int height = getWorld().getHeight();
     int rij = -1;
@@ -297,6 +297,25 @@ public void climbOverFence() {  // klim over een hekjee
         showCompliment("Wereld hersteld!");
     }
 }
+
+public void gaNaarHoek() {
+    walkToWorldEdge();   // tegen eeen rand
+    turnRight();
+    walkToWorldEdge();   // nu in een hoek
+    turn180();           // kijk de wereld weer in
+}
+
+public boolean volgendeLijn() {   // stap naar de volgende rijenkolom
+    turnRight();
+    if (borderAhead()) {          // geen lijn meer
+        turnLeft();
+        return false;
+    }
+    move();
+    turnLeft();
+    return true;
+}
+
 
   
   public void pickUpGrainsAndPrintCoordinates() { // dodo loop naar vooren en onder weg pakt ie graan op en prinie cordinaten
