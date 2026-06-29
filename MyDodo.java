@@ -61,6 +61,17 @@ public boolean canMove() {
       turnRight();
   }
   
+  public void moveRandomly() {
+    int myNrOfStepsTaken = 0;
+    while (myNrOfStepsTaken < Mauritius.MAXSTEPS) {
+        face(randomDirection());
+        if (canMove()) {
+            move();
+            myNrOfStepsTaken++;
+        }
+    }
+}
+  
  
  
   
